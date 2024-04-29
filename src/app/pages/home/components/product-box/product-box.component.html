@@ -1,0 +1,26 @@
+<mat-card *ngIf="product" [ngClass]="{'text-center': !fullWidthMode}" class="hover:bg-amber-100 hover:shadow-md" style="transition: 0.3s;">
+    <div [ngClass]="{flex:fullWidthMode}">
+        
+        <img class="mb-1 mx-auto  h-[200px] max-w-64"
+            [ngClass]="{'h-250px': '!fullWidthMode','max-height-full': fullWidthMode}"
+            [src]="product.image">
+        <div class="w-full" [ngClass]="{'px-8 flex flex-col justify-between':fullWidthMode}">
+            <div [ngClass]="{'p-5':fullWidthMode}">
+                <span class="text-indigo-700 text-xs italic "
+                [ngClass]="{'text-indigo-700 pl-5 ':fullWidthMode}"
+                > {{product.category}}</span>
+                <p style="margin-left: 15px; margin-right: 15px;" class="truncate hover:whitespace-normal"
+                [ngClass]="{'text-base pt-3 ':fullWidthMode}"
+                >{{product.title}}</p>
+                <p *ngIf="fullWidthMode" [ngClass]="{'text-base pt-2 pl-3 ':fullWidthMode}">{{product.description}}</p>
+            </div>
+            <div class="flex justify-center" [ngClass]="{'pb-3 ':fullWidthMode}">
+                <span class="text-red-400 pr-5"
+                >{{ product.price | currency }}</span>
+                <button (click)="onAddToCart()" class="mb-5 pl-5">
+                    <mat-icon  class="text-grey-400 text-amber-400 hover:text-indigo-700" style="transition: 0.2s;"  >shopping_cart</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>

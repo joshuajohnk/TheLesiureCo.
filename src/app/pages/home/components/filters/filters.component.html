@@ -1,0 +1,10 @@
+<mat-expansion-panel *ngIf="categories" style="background-color: #2B2C9D;">
+    <mat-expansion-panel-header>
+        <mat-panel-title style="color: #EAE7E1;" class="text-base">CATEGORIES</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let category of categories" [value]="category" >
+            <button (click)="OnShowCategory(category)" style="color: #EAE7E1; text-transform: uppercase;" class="text-sm">{{category}}</button>
+        </mat-list-option>
+    </mat-selection-list>
+</mat-expansion-panel>

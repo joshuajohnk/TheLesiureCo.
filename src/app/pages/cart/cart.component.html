@@ -1,0 +1,88 @@
+<mat-card class="mx-auto max-w-7xl" *ngIf="cart.items.length">
+    <table mat-table [dataSource]="dataSource" mat-table-rounded class="mat-elevation-z8 w-full">
+
+            <ng-container matColumnDef="product">
+                <th mat-header-cell *matHeaderCellDef class="text-indigo-700">Product</th>
+                <td mat-cell *matCellDef="let element">
+                    <img src="{{element.product}}" alt="product" class="w-[100px] my-5">
+                </td>
+                <td mat-footer-cell *matFooterCellDef>
+                    <button mat-raised-button routerLink="/home" style="background-color: #312583; color: #ffffff;">Continue Shopping</button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="text-indigo-700">Name</th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="truncate max-w-xs block">{{element.name}}</span>
+                </td>
+                <td mat-footer-cell *matFooterCellDef>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef class="text-indigo-700">Price</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.price | currency}}
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef class="text-indigo-700 text-center">Quantity</th>
+                <td mat-cell *matCellDef="let element">
+
+                   <div class="flex justify-start items-center">
+                        <button (click)="onRemoveQuantity(element)" mat-icon-button>
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <span>{{element.quantity}}</span>
+                        <button (click)="onAddQuantity(element)" mat-icon-button>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                   </div>
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef class="text-indigo-700">Total</th>
+                <td mat-cell *matCellDef="let element">
+                    {{(element.quantity * element.price) | currency}}
+                </td>
+                <td mat-footer-cell *matFooterCellDef>
+                    <span class="font-bold py-5 block">
+                        {{getTotal(cart.items) | currency}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>
+                    <button mat-raised-button color="warn" class="float-right" (click)="onClearCart()">
+                        Clear All
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-mini-fab color="warn" class="float-right" (click)="onRemoveFromCart(element)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </td>
+                <td mat-footer-cell *matFooterCellDef>
+                    <button (click)="onCheckout()" mat-raised-button color="primary" class="float-right" style="background-color: #7FCA20;">Proceed to
+                        checkout</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+</mat-card>
+<mat-card *ngIf="!cart.items.length" class="p-5 flex text-center">
+    <span>
+        Your Cart is empty hooman!
+         Buy something !!!
+        <button mat-raised-button routerLink="/home" class="ml-5" style="background-color: #312583; color: #EAE7E1;">Start Shopping</button>
+    </span>
+</mat-card>

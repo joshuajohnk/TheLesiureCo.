@@ -1,0 +1,35 @@
+<mat-card class="mb-4" style="background-color: #ffe2b1;">
+    <div class="flex justify-between">
+        <div>
+            <button mat-button [mat-menu-trigger-for]="sortByMenu" class="ml-5" style="text-transform: uppercase; color: #2B2C9D;">
+                sort {{sort}}
+            </button>
+            <mat-menu #sortByMenu="matMenu" style="background-color: #ffe2b1;">
+                <button (click)="onSortUpdate('desc')" mat-menu-item style="text-transform: uppercase; color: #2B2C9D;">desc</button>
+                <button (click)="onSortUpdate('asc')" mat-menu-item style="text-transform: uppercase; color: #2B2C9D;">asc</button>
+            </mat-menu>
+        </div>
+        <div class="flex items-center">
+            <div>
+                <button mat-button [matMenuTriggerFor]="menu" style="color: #2B2C9D; text-transform: uppercase;" class="mr-5">
+                    show {{ itemsShowCount }}
+                    <mat-icon style="color: #312583;">expand</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button (click)="onItemsUpdated(12)" mat-menu-item style="color: #2B2C9D;">12</button>
+                    <button (click)="onItemsUpdated(24)" mat-menu-item style="color: #2B2C9D;">24</button>
+                    <button (click)="onItemsUpdated(36)" mat-menu-item style="color: #2B2C9D;">36</button>
+                </mat-menu>
+            </div>
+            <button (click)="onColumnsUpdated(1)" class="pr-1">
+                <mat-icon style="color: #312583;">view_list</mat-icon>
+            </button>
+            <button (click)="onColumnsUpdated(3)" class="pr-1"> 
+                <mat-icon style="color: #312583;">view_module</mat-icon>
+            </button>
+            <button (click)="onColumnsUpdated(4)" class="mr-5">
+                <mat-icon style="color: #312583;">view_comfy</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-card>
